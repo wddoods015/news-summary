@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import newsReducer from './NewsSlice';
+import newsReducer from './slice/NewsSlice';
+import trendReducer from './slice/TrendSlice';
 
 export const store = configureStore({
   reducer: {
       news: newsReducer,
+      trends: trendReducer,
     },
   },
 );

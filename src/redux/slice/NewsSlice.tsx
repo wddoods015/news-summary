@@ -1,11 +1,13 @@
-// src/redux/newsSlice.ts
+// src/redux/slice/newsSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://43.203.208.22:3000/'
+// const API_URL = 'http://43.203.208.22:3000/'
+const currentDate = new Date;
+console.log(currentDate)
 
 export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
-  const response = await fetch(`http://43.203.208.22:3000/api/articles/${'2024.10.21.'}`);
+  const response = await fetch(`http://43.203.208.22:3000/api/articles/${{currentDate}}`);
   if (!response.ok) {
     throw new Error('Failed to fetch news');
   }
@@ -13,6 +15,22 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   console.log(data.data.items)
   return data.data.items; // Adjust according to the actual API response structure
 });
+
+// export const fetchNews = createAsyncThunk(
+//   'news/fetchNews',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.get(`http://43.203.208.22:3000/api/articles/${currentDate}`);
+//       console.log(response.data.data.items);
+//       return response.data.data.items; // API 응답 구조에 맞게 조정
+//     } catch (error) {
+//       if (axios.isAxiosError(error)) {
+//         return rejectWithValue(error.message);
+//       }
+//       return rejectWithValue('An unexpected error occurred');
+//     }
+//   }
+// );
 
 interface NewsState {
   items: any[];
