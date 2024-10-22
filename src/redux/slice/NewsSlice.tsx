@@ -2,18 +2,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const API_URL = 'http://43.203.208.22:3000/'
+const API_URL = 'https://wispmall.duckdns.org'
 const currentDate = new Date;
 console.log(currentDate)
 
 export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
-  const response = await fetch(`http://43.203.208.22:3000/api/articles/${{currentDate}}`);
+  const response = await fetch(`${API_URL}/api/articles/${{currentDate}}`);
   if (!response.ok) {
     throw new Error('Failed to fetch news');
   }
   const data = await response.json();
   console.log(data.data.items)
-  return data.data.items; // Adjust according to the actual API response structure
+  return data.data.items; 
 });
 
 // export const fetchNews = createAsyncThunk(
@@ -21,7 +21,7 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
 //   async (_, { rejectWithValue }) => {
 //     try {
 //       const response = await axios.get(`http://43.203.208.22:3000/api/articles/${currentDate}`);
-//       console.log(response.data.data.items);
+//       console.log(response.data);
 //       return response.data.data.items; // API 응답 구조에 맞게 조정
 //     } catch (error) {
 //       if (axios.isAxiosError(error)) {
