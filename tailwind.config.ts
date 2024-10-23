@@ -11,6 +11,10 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#cccccc",
+      },
+      height: {
+        '600': '600px', // 사용자 정의 높이 추가
       },
     },
   },

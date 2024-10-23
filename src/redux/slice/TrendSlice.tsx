@@ -38,15 +38,14 @@ export const fetchTrends = createAsyncThunk(
 const trendSlice = createSlice({
   name: 'trends',
   initialState,
-  // reducers: {
-  //   openModal: (state) => {
-  //     state.isModalOpen = true;
-  //   },
-  //   closeModal: (state) => {
-  //     state.isModalOpen = false;
-  //   }
-  // },
-  reducers: {},
+  reducers: {
+    openModal: (state) => {
+      state.isModalOpen = true;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTrends.pending, (state) => {
@@ -64,5 +63,5 @@ const trendSlice = createSlice({
   }
 });
 
-// export const { openModal, closeModal } = trendSlice.actions;
+export const { openModal, closeModal } = trendSlice.actions;
 export default trendSlice.reducer;
