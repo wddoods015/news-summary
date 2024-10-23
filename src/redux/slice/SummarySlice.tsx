@@ -5,6 +5,7 @@ import axios from 'axios';
 
 interface summaryState {
     summary: string[];
+    link: ''
     isLoading: boolean;
     error: string | null;
     isSummaryOpen: boolean;
@@ -12,6 +13,7 @@ interface summaryState {
 
   const initialState: summaryState = {
     summary: [],
+    link: '',
     isLoading: false,
     error: null,
     isSummaryOpen: false
