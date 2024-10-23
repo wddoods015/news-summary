@@ -24,13 +24,14 @@ export default function Home() {
     <main className="min-w-[390px]  mx-auto p-4 border h-auto" >
       <Header/>
       <SearchModal/>
-      <details>
-      <div className="h-48 border border-gray-300">
-      headline news section
+      <details open>
+      <summary></summary>
+        <div className="h-48 border border-gray-300">
+      오늘의 헤드라인 뉴스 영역
       </div>
       </details>
       <div className='h-24 border border-gray-300'>
-      카테고리
+      카테고리 영역
       </div>
       <div className="h-1000 overflow-y-auto border border-gray-300">
       <NewsListContainer />
