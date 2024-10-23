@@ -1,9 +1,10 @@
 // src/components/NewsList.tsx news 데이터 배열
 import React from 'react';
 import NewsCard from './NewsCard';
+import { NewsItem } from '../redux/slice/NewsSlice';
 
 interface NewsListProps {
-  items: any[];
+  items: NewsItem[];
 }
 
 const NewsList: React.FC<NewsListProps> = ({ items }) => {

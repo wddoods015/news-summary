@@ -18,6 +18,7 @@
 import NewsListContainer from '../components/NewsListContainer';
 import SearchModal from '@/components/SearchModal';
 import Header from '@/components/Header';
+import CategoryContainer from '@/components/CategoryContainer';
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
       </div>
       </details>
       <div className='h-24 border border-gray-300'>
-      카테고리
+      {/* <CategoryContainer /> */}
       </div>
       <div className="h-1000 overflow-y-auto border border-gray-300">
       <NewsListContainer />

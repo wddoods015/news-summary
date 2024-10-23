@@ -1,15 +1,17 @@
 // src/components/NewsCard.tsx
 import React from 'react';
+import { NewsItem } from '../redux/slice/NewsSlice';
 import { removeHTMLTags } from '../utils/textUtils';
 
 interface NewsCardProps {
-  article: {
-    title: string;
-    description: string;
-    link: string;
-    originallink: string;
-    pubDate: string;
-  };
+  article: NewsItem;
+  // {
+  //   title: string;
+  //   description: string;
+  //   link: string;
+  //   originallink: string;
+  //   pubDate: string;
+  // };
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
