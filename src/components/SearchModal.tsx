@@ -7,7 +7,7 @@ import { fetchTrends } from '@/redux/slice/TrendSlice';
 
 const SearchModal = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { trends, isLoading, error, isModalOpen } = useSelector(
+  const { trends, isLoading, error } = useSelector(
     (state: RootState) => state.trends
   );
   console.log(trends)
