@@ -34,6 +34,7 @@ export default function Home() {
       </div>
       </details>
       <div className='h-24 border border-gray-300'>
+      {/* <CategoryContainer /> */}
       카테고리 영역
       </div>
       <div className="h-1000 overflow-y-auto border border-gray-300">

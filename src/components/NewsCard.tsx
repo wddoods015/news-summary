@@ -1,18 +1,20 @@
 // src/components/NewsCard.tsx
 import React from 'react';
+import { NewsItem } from '../redux/slice/NewsSlice';
 import { removeHTMLTags } from '../utils/textUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import { openSummaryModal, fetchSummary } from '@/redux/slice/SummarySlice';
 import { AppDispatch } from '@/redux/store'; 
 
 interface NewsCardProps {
-  article: {
-    title: string;
-    description: string;
-    link: string;
-    originallink: string;
-    pubDate: string;
-  };
+  article: NewsItem;
+  // {
+  //   title: string;
+  //   description: string;
+  //   link: string;
+  //   originallink: string;
+  //   pubDate: string;
+  // };
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
