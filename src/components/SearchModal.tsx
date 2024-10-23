@@ -42,15 +42,15 @@ const SearchModal: React.FC = () => {
                             placeholder="여기에 입력하세요"
                             className="mt-4 min-w-[390px] max-w-[590px] p-2 border border-gray-300 rounded block"
                         />
-    <h2>오늘의 키워드</h2>
-    {trends && trends.map((keyword, index) => (
-      <ul key={index}>
-        <li>{keyword}</li>
-      </ul>
-    ))}
+    <h1 className='m-4 font-bold w-full'>오늘의 키워드</h1>
+      <ul  className="m-4 grid grid-cols-5 gap-4">
+      {trends && trends.map((keyword, index) => (
+        <li key={index} className="col-span-1">{keyword}</li>
+      ))}
+        </ul>
     <button
       onClick={() => dispatch(closeModal())}
-      className="w-16 mt-4 bg-blue-500 text-white py-2 px-4 rounded text-center block"
+      className="w-16 mt-4 border text-black py-2 px-4 rounded text-center block"
     >
       x
     </button>
