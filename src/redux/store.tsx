@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import newsReducer from './slice/NewsSlice'; // 뉴스 슬라이스 임포트
 import modalReducer from './slice/ModalSlice'; // 모달 슬라이스 임포트
 import trendReducer from './slice/TrendSlice';
+import headlineReducer from './slice/HeadLineSlice';
 
 export const store = configureStore({
   reducer: {
     news: newsReducer, // 뉴스 슬라이스 추가
     modal: modalReducer, // 모달 슬라이스 추가
     trends: trendReducer,
+    headlines: headlineReducer,
   },
 });
 
