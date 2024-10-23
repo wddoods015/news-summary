@@ -19,15 +19,17 @@ import NewsListContainer from '../components/NewsListContainer';
 import HeadLineContainer from '@/components/HeadLineContainer';
 import SearchModal from '@/components/SearchModal';
 import Header from '@/components/Header';
+import SummaryModal from '@/components/SummaryModal';
 
 export default function Home() {
   return (
     <main className="min-w-[390px] mx-auto p-4 border h-auto" >
       <Header/>
+      <SummaryModal/>
       <SearchModal/>
       <details open>
       <summary>오늘의 헤드라인</summary>
-        <div className="h-48 border border-gray-300 scrollbar-hidden">
+        <div className="h-56 scrollbar-hidden">
       <HeadLineContainer />
       </div>
       </details>

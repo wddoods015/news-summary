@@ -16,7 +16,7 @@ const SearchModal: React.FC = () => {
   const { trends, isLoading, error } = useSelector(
     (state: RootState) => state.trends
   );
-  console.log('t',trends); // 트렌드 키워드 배열로 가져옴
+  console.log('seaechModal.tsx trends확인',trends); // 트렌드 키워드 배열로 가져옴
 
   useEffect(() => {
     if(isOpen) {

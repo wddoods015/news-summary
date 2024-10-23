@@ -8,7 +8,7 @@ interface HeadLineListProps {
 const HeadLineList: React.FC<HeadLineListProps> = ({headlines}) => {
 
     return (
-        <div>
+        <div className="flex flex-col gap-12">
             {headlines && headlines.map((Headarticle, index) => (
         <HeadLineCard key={index} Headarticle={Headarticle} />
       ))}
