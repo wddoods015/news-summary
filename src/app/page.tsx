@@ -25,9 +25,9 @@ export default function Home() {
   return (
     <main className="min-w-[390px] mx-auto p-4 border h-auto" >
       <Header/>
-      <SummaryModal/>
+      <SummaryModal/> 
       <SearchModal/>
-      <details open>
+      <details open className='mt-[80px]'>
       <summary>오늘의 헤드라인</summary>
         <div className="h-56 scrollbar-hidden">
       <HeadLineContainer />
