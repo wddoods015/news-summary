@@ -27,11 +27,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     
   };
   
-
-
-
-
-  // article.link를 summary fetch 파라미터로 보내야 하는데... 
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
       <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-333333-500">
