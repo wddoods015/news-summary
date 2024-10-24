@@ -8,7 +8,7 @@ import { fetchTrends } from '@/redux/slice/TrendSlice';
 
 const SearchModal: React.FC = () => {
   const state = useSelector((state: RootState) => state); // 전체 상태 가져오기
-  console.log(state); // 상태를 출력하여 modal의 상태 확인
+  //console.log('이건가?',state); // 상태를 출력하여 modal의 상태 확인
 
   const isOpen = useSelector((state: RootState) => state.modal.isOpen); // modal 상태 가져오기
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +16,7 @@ const SearchModal: React.FC = () => {
   const { trends, isLoading, error } = useSelector(
     (state: RootState) => state.trends
   );
-  console.log('t',trends);
+  console.log('seaechModal.tsx trends확인',trends); // 트렌드 키워드 배열로 가져옴
 
   useEffect(() => {
     if(isOpen) {
@@ -42,9 +42,15 @@ const SearchModal: React.FC = () => {
                             placeholder="여기에 입력하세요"
                             className="mt-4 min-w-[390px] max-w-[590px] p-2 border border-gray-300 rounded block"
                         />
+    <h1 className='m-4 font-bold w-full'>오늘의 키워드</h1>
+      <ul  className="m-4 grid grid-cols-5 gap-4">
+      {trends && trends.map((keyword, index) => (
+        <li key={index} className="col-span-1">{keyword}</li>
+      ))}
+        </ul>
     <button
       onClick={() => dispatch(closeModal())}
-      className="w-16 mt-4 bg-blue-500 text-white py-2 px-4 rounded text-center block"
+      className="w-16 mt-4 border text-black py-2 px-4 rounded text-center block"
     >
       x
     </button>

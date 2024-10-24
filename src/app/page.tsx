@@ -16,18 +16,22 @@
 // import { AppDispatch, RootState } from '../redux/store';
 // import { fetchNews } from '../redux/NewsSlice';
 import NewsListContainer from '../components/NewsListContainer';
+import HeadLineContainer from '@/components/HeadLineContainer';
 import SearchModal from '@/components/SearchModal';
 import Header from '@/components/Header';
+import SummaryModal from '@/components/SummaryModal';
 import CategoryContainer from '@/components/CategoryContainer';
 
 export default function Home() {
   return (
-    <main className="min-w-[390px]  mx-auto p-4 border h-auto" >
+    <main className="min-w-[390px] mx-auto p-4 border h-auto" >
       <Header/>
+      <SummaryModal/>
       <SearchModal/>
-      <details>
-      <div className="h-48 border border-gray-300">
-      headline news section
+      <details open>
+      <summary>오늘의 헤드라인</summary>
+        <div className="h-56 scrollbar-hidden">
+      <HeadLineContainer />
       </div>
       </details>
       <div className='h-24 border border-gray-300'>

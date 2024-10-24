@@ -24,4 +24,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .scrollbar-hidden {
+    overflow: hidden; /* 스크롤바 숨기기 */
+    overflow-y: scroll; /* 세로 스크롤 가능 */
+    scrollbar-width: none; /* Firefox 스크롤바 숨기기 */
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 스크롤바 숨기기 */
+  }
 }
