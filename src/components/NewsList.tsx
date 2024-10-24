@@ -1,4 +1,4 @@
-// src/components/NewsList.tsx
+// src/components/NewsList.tsx news 데이터 배열
 import React from 'react';
 import NewsCard from './NewsCard';
 
