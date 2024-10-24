@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 interface summaryState {
-    summary: string[];
+    summary: string;
     link: ''
     isLoading: boolean;
     error: string | null;
@@ -12,7 +12,7 @@ interface summaryState {
   }
 
   const initialState: summaryState = {
-    summary: [],
+    summary: '',
     link: '',
     isLoading: false,
     error: null,
@@ -21,9 +21,12 @@ interface summaryState {
 
   const API_URL = 'https://wispmall.duckdns.org'
 
-  export const fetchSummary = createAsyncThunk('news/fetchNews', async (_, { rejectWithValue }) => {
+  export const fetchSummary = createAsyncThunk('summary/fetchSummary', async (link:string, { rejectWithValue }) => {
     try{
-        const response = await axios.post((`${API_URL}/api/functions/`), );
+        const response = await axios.post((`${API_URL}/api/functions/`), {
+          link: link  // body에 link 데이터를 포함
+        });
+        console.log('link확인:',link, '요약데이터확인', response);
         return response.data.data;
     
     } catch (error) {

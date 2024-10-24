@@ -8,7 +8,7 @@ import { fetchTrends } from '@/redux/slice/TrendSlice';
 
 const SearchModal: React.FC = () => {
   const state = useSelector((state: RootState) => state); // 전체 상태 가져오기
-  //console.log('이건가?',state); // 상태를 출력하여 modal의 상태 확인
+  
 
   const isOpen = useSelector((state: RootState) => state.modal.isOpen); // modal 상태 가져오기
   const dispatch = useDispatch<AppDispatch>();

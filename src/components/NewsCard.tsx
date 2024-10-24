@@ -1,8 +1,9 @@
 // src/components/NewsCard.tsx
 import React from 'react';
 import { removeHTMLTags } from '../utils/textUtils';
-import { useDispatch } from 'react-redux';
-import { openSummaryModal } from '@/redux/slice/SummarySlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { openSummaryModal, fetchSummary } from '@/redux/slice/SummarySlice';
+import { AppDispatch } from '@/redux/store'; 
 
 interface NewsCardProps {
   article: {
@@ -15,13 +16,20 @@ interface NewsCardProps {
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
-  const dispatch = useDispatch(); // dispatch 가져오기
+  const dispatch: AppDispatch = useDispatch();  // AppDispatch 타입 적용
   
-  const handleClick = () => {
-    console.log('link',article.link);
-    dispatch(openSummaryModal());
+  const handleClick = (link:string) => {
+    //console.log('link', article.link);
+    dispatch(openSummaryModal());  // 모달 열기 액션 디스패치
+    dispatch(fetchSummary(article.link));  // 비동기 액션으로 링크 전달
+    
   };
   
+
+
+
+
+  // article.link를 summary fetch 파라미터로 보내야 하는데... 
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
       <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-333333-500">
@@ -32,7 +40,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
         원문기사 읽기
       </a>
       <p>{article.pubDate}</p>
-      {article.link === article.originallink ? <button className="bg-blue-500 text-white  rounded-[5px] p-1.5 ml-[85%]" onClick={handleClick}>3줄 요약</button> : null}
+      {article.link !== article.originallink ? <button className="bg-blue-500 text-white  rounded-[5px] p-1.5 ml-[85%]" onClick={() => handleClick(article.link)}>3줄 요약</button> : null}
     </div>
   );
 };
