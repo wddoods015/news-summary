@@ -35,7 +35,7 @@ export default function Home() {
       </div>
       </details>
       <div className='h-24 border border-gray-300'>
-      {/* <CategoryContainer /> */}
+      <CategoryContainer />
       </div>
       <div className="h-1000 overflow-y-auto border border-gray-300">
       <NewsListContainer />
