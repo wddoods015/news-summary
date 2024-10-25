@@ -15,6 +15,7 @@ const formatDate = (date: Date): string => {
 
 // 타입 정의
 export interface NewsItem {
+  index: string;
   title: string;
   description: string;
   link: string;
