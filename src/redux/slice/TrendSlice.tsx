@@ -13,14 +13,12 @@ interface TrendState {
   trends: string[];
   isLoading: boolean;
   error: string | null;
-  isModalOpen: boolean;
 }
 
 const initialState: TrendState = {
   trends: [],
   isLoading: false,
   error: null,
-  isModalOpen: false
 };
 
 export const fetchTrends = createAsyncThunk(
@@ -38,14 +36,7 @@ export const fetchTrends = createAsyncThunk(
 const trendSlice = createSlice({
   name: 'trends',
   initialState,
-  reducers: {
-    openModal: (state) => {
-      state.isModalOpen = true;
-    },
-    closeModal: (state) => {
-      state.isModalOpen = false;
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTrends.pending, (state) => {
@@ -63,5 +54,4 @@ const trendSlice = createSlice({
   }
 });
 
-export const { openModal, closeModal } = trendSlice.actions;
 export default trendSlice.reducer;

@@ -27,7 +27,7 @@ const SearchModal: React.FC = () => {
   if (!isOpen) return null; // 모달이 닫혀 있으면 null 반환
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
     onClick={(e) => {
       if (e.target === e.currentTarget) {
         dispatch(closeModal());
