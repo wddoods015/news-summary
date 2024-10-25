@@ -26,16 +26,16 @@ export default function Home() {
   return (
     <main className="min-w-[390px] mx-auto p-4 border h-auto" >
       <Header/>
-      <SummaryModal/> 
+      <SummaryModal/>
       <SearchModal/>
-      <details open className='mt-[80px]'>
+      <details open>
       <summary>오늘의 헤드라인</summary>
         <div className="h-56 scrollbar-hidden">
       <HeadLineContainer />
       </div>
       </details>
       <div className='h-24 border border-gray-300'>
-      {/* <CategoryContainer /> */}
+      <CategoryContainer />
       </div>
       <div className="h-1000 overflow-y-auto border border-gray-300">
       <NewsListContainer />
