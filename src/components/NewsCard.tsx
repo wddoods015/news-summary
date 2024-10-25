@@ -1,18 +1,20 @@
 // src/components/NewsCard.tsx
 import React from 'react';
+import { NewsItem } from '../redux/slice/NewsSlice';
 import { removeHTMLTags } from '../utils/textUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import { openSummaryModal, fetchSummary } from '@/redux/slice/SummarySlice';
 import { AppDispatch } from '@/redux/store'; 
 
 interface NewsCardProps {
-  article: {
-    title: string;
-    description: string;
-    link: string;
-    originallink: string;
-    pubDate: string;
-  };
+  article: NewsItem;
+  // {
+  //   title: string;
+  //   description: string;
+  //   link: string;
+  //   originallink: string;
+  //   pubDate: string;
+  // };
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
@@ -25,11 +27,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     
   };
   
-
-
-
-
-  // article.link를 summary fetch 파라미터로 보내야 하는데... 
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
       <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-333333-500">

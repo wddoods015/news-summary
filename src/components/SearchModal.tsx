@@ -8,7 +8,7 @@ import { fetchTrends } from '@/redux/slice/TrendSlice';
 
 const SearchModal: React.FC = () => {
   const state = useSelector((state: RootState) => state); // 전체 상태 가져오기
-  
+  //console.log('이건가?',state); // 상태를 출력하여 modal의 상태 확인
 
   const isOpen = useSelector((state: RootState) => state.modal.isOpen); // modal 상태 가져오기
   const dispatch = useDispatch<AppDispatch>();
@@ -27,7 +27,7 @@ const SearchModal: React.FC = () => {
   if (!isOpen) return null; // 모달이 닫혀 있으면 null 반환
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex z-50"
     onClick={(e) => {
       if (e.target === e.currentTarget) {
         dispatch(closeModal());
