@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
-import { fetchNews } from '../redux/slice/NewsSlice';
+import { fetchNewsByDate } from '../redux/slice/NewsSlice';
 import NewsList from './NewsList';
 
 export default function NewsListContainer() {
@@ -12,7 +12,7 @@ export default function NewsListContainer() {
   const { items, loading, error } = useSelector((state: RootState) => state.news);
 
   useEffect(() => {
-    dispatch(fetchNews());
+    dispatch(fetchNewsByDate());
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;

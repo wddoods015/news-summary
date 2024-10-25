@@ -1,67 +1,45 @@
 // src/redux/slice/CategorySlice.tsx
 
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getCategories } from '@/api/apiCategories';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CategoryState {
   categories: string[];
-  selectedCategories: string[];
+  selectedCategory: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: CategoryState = {
-  categories: [],
-  selectedCategories: [],
+  categories: ['전체', '정치', '경제', '사회', '생활문화', 'IT과학', '세계'],
+  selectedCategory: '전체',  // 기본값: '전체' 카테고리 
   isLoading: false,
   error: null,
 };
 
-export const fetchCategories = createAsyncThunk(
-  'categories/fetchCategories',
-  async (_, { rejectWithValue }) => {
-    try {
-      const categories = await getCategories();
-      return categories;
-    } catch (error) {
-      return rejectWithValue('카테고리를 불러오는데 실패했습니다.');
-    }
-  }
-);
+// export const fetchCategories = createAsyncThunk(
+//   'categories/fetchCategories',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const categories = await getCategories();
+//       return categories;
+//     } catch (error) {
+//       return rejectWithValue('카테고리를 불러오는데 실패했습니다.');
+//     }
+//   }
+// );
 
 const categorySlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    toggleCategory: (state, action: PayloadAction<string>) => {
-      const categories = action.payload;
-      const index = state.selectedCategories.indexOf(categories);
-      if (index === -1) {
-        state.selectedCategories.push(categories);
-      } else {
-        state.selectedCategories.splice(index, 1);
-      }
+    setSelectedCategory: (state, action: PayloadAction<string>) => {
+      state.selectedCategory = action.payload;
     },
-    clearSelectedCategories: (state) => {
-      state.selectedCategories = [];
+    clearSelectedCategory: (state) => {
+      state.selectedCategory = '전체';
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCategories.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.categories = action.payload;
-      })
-      .addCase(fetchCategories.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
-      });
   },
 });
 
-export const { toggleCategory, clearSelectedCategories } = categorySlice.actions;
-export default categorySlice.reducer; 
+export const { setSelectedCategory, clearSelectedCategory } = categorySlice.actions;
+export default categorySlice.reducer;

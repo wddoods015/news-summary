@@ -1,5 +1,6 @@
 // src/redux/slice/newsSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { getNewsByCategory, getNewsByDate } from '@/api/apiNewsList';
 import axios from 'axios';
 
 const API_URL = 'https://wispmall.duckdns.org'
@@ -21,7 +22,7 @@ export interface NewsItem {
   pubDate: string;
 }
 
-interface NewsApiResponse {
+export interface NewsApiResponse {
   data: {
     items: NewsItem[];
     lastBuildDate: string;
@@ -45,33 +46,59 @@ const initialState: NewsState = {
   error: null,
 };
 
-// fetch 함수
-// export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
-//   const response = await fetch(`${API_URL}/api/articles/${{currentDate}}`);
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch news');
-//   }
-//   const data = await response.json();
-//   console.log(data.data.items)
-//   return data.data.items; 
-// });
+// API 요청 함수 
+// 현재날짜 뉴스리스트
+// 수정전
+// export const fetchNewsByDate = createAsyncThunk(
+//   'news/fetchNewsByDate',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const currentDate = formatDate(new Date());
 
-// API 요청 함수
-export const fetchNews = createAsyncThunk(
-  'news/fetchNews',
+//       const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
+//       console.log(response.data);
+//       console.log(response.data.data.items)
+//       return response.data.data.items;
+//     } catch (error) {
+//       if (axios.isAxiosError(error)) {
+//         return rejectWithValue(error.message);
+//       }
+//       return rejectWithValue('An unexpected error occurred');
+//     }
+//   }
+// );
+
+// 수정후
+export const fetchNewsByDate = createAsyncThunk(
+  'news/fetchNewsByDate',
   async (_, { rejectWithValue }) => {
     try {
       const currentDate = formatDate(new Date());
+      return await getNewsByDate(currentDate);
+    } catch (error: any) {
+      return rejectWithValue(error.message);
 
-      const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-      console.log(response.data);
-      console.log(response.data.data.items)
-      return response.data.data.items;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue('An unexpected error occurred');
+    //   const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
+    //   console.log(response.data);
+    //   console.log(response.data.data.items)
+    //   return response.data.data.items;
+    // } catch (error) {
+    //   if (axios.isAxiosError(error)) {
+    //     return rejectWithValue(error.message);
+    //   }
+    //   return rejectWithValue('An unexpected error occurred');
+    }
+  }
+);
+
+// 카테고리 뉴스리스트
+export const fetchNewsByCategory = createAsyncThunk(
+  'news/fetchNewsByCategory',
+  async (category: string, { rejectWithValue }) => {
+    try {
+      return await getNewsByCategory(category);
+    } catch (error: any) {
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -83,17 +110,29 @@ const newsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchNews.pending, (state) => {
+      .addCase(fetchNewsByCategory.pending, (state) => {
         state.loading = true;
-        state.error = null; // 로딩 시작할 때 에러 초기화
+        state.error = null;
       })
-      .addCase(fetchNews.fulfilled, (state, action: PayloadAction<NewsItem[]>) => {
+      .addCase(fetchNewsByCategory.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(fetchNews.rejected, (state, action) => {
+      .addCase(fetchNewsByCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch news';
+        state.error = action.payload as string;
+      })
+      .addCase(fetchNewsByDate.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchNewsByDate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchNewsByDate.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
