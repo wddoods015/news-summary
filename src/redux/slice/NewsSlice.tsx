@@ -35,16 +35,28 @@ export interface NewsApiResponse {
   statusText: string;
 }
 
+
+// 무한 스크롤링 인터페이스
+export interface visibleNews {
+  visibleNews : Array<NewsItem>;
+  loadCount : number;
+}
+
+
 interface NewsState {
   items: NewsItem[];
+  visibleItems: NewsItem[];
   loading: boolean;
   error: string | null;
+  loadCount : number;
 }
 
 const initialState: NewsState = {
   items: [],
+  visibleItems : [],
   loading: false,
   error: null,
+  loadCount: 1
 };
 
 // API 요청 함수 
@@ -108,7 +120,19 @@ export const fetchNewsByCategory = createAsyncThunk(
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    addVisibleNews: (state, action) => {
+      state.visibleItems = state.visibleItems.concat(action.payload);
+    },
+    addLoadCount: (state) => {
+      state.loadCount += 1;
+      console.log('state.loadCount', state.loadCount);
+    },
+    resetLoadCount: (state) => {
+      state.loadCount = 1;
+      console.log('state.loadCount', state.loadCount);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNewsByCategory.pending, (state) => {
@@ -118,6 +142,7 @@ const newsSlice = createSlice({
       .addCase(fetchNewsByCategory.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+        state.visibleItems = state.items.slice(0,10);
       })
       .addCase(fetchNewsByCategory.rejected, (state, action) => {
         state.loading = false;
@@ -130,6 +155,7 @@ const newsSlice = createSlice({
       .addCase(fetchNewsByDate.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+        state.visibleItems = state.items.slice(0,10);
       })
       .addCase(fetchNewsByDate.rejected, (state, action) => {
         state.loading = false;
@@ -139,3 +165,4 @@ const newsSlice = createSlice({
 });
 
 export default newsSlice.reducer;
+export const { addVisibleNews, addLoadCount, resetLoadCount } = newsSlice.actions;
