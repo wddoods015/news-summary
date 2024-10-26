@@ -1,45 +1,44 @@
 "use client"; 
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'; // RootState 가져오기
 import { closeSummaryModal } from '@/redux/slice/SummarySlice'; // closeModal 액션 가져오기
-import { fetchSummary } from '@/redux/slice/SummarySlice';
 
 const SummaryModal: React.FC = () => {
-const state = useSelector((state: RootState) => state);
+  const isSummaryOpen = useSelector((state: RootState) => state.summary.isSummaryOpen);
+   const dispatch = useDispatch<AppDispatch>();
+   
+   
+   const summary = useSelector((state: RootState) => state.summary.summary);
+   const link = useSelector((state: RootState) => state.summary.link);
+   console.log('모달에서 summary 확인:', summary); 
+   console.log('모달에서 해당기사 링크:', link);
+  // 모달이 닫혀 있으면 null 반환
+  if (!isSummaryOpen) return null;
 
-const isOpen = useSelector((state: RootState) => state.summary.isSummaryOpen);
-const dispatch = useDispatch<AppDispatch>();
-
-const { summary } = useSelector(
-    (state: RootState) => state.summary
-  );
-  console.log('요약 뉴스 확인',summary); // 트렌드 키워드 배열로 가져옴
-
-useEffect(() => {
-    if(isOpen) {
-        dispatch(fetchSummary());
-    }
-}, [isOpen, dispatch]);
-
-if (!isOpen) return null; // 모달이 닫혀 있으면 null 반환
-
-return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex"
-        onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              dispatch(closeSummaryModal());
-            }
-          }}
+  return (
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex mt-[60px]"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          dispatch(closeSummaryModal());
+        }
+      }}
+    >
+      <dialog className="w-full mx-auto h-screen rounded-b-lg shadow-lg p-10 flex flex-col">
+        <h2 className="text-lg font-bold mb-[40px]">3줄 요약</h2>
+        <span>{summary}</span> 
+        <span>뉴스 링크</span>
+        <button 
+          className="mt-4 p-2 w-12 bg-blue-500 text-white rounded" 
+          onClick={() => dispatch(closeSummaryModal())} // 버튼 클릭 시 모달 닫기
         >
-            <dialog className="w-full mx-auto h-600 rounded-b-lg shadow-lg p-10 flex flex-col">
-                <span>여기 요약 뉴스 보여줄 곳</span>
-                <span>뉴스 링크</span>
-                <button>x</button>
-            </dialog>
-        </div>
-    );
+          x
+        </button>
+      </dialog>
+    </div>
+  );
 };
 
 export default SummaryModal;

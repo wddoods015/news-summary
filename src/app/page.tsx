@@ -28,9 +28,9 @@ export default function Home() {
       <Header/>
       <SummaryModal/>
       <SearchModal/>
-      <details open>
+      <details open className='mt-16'>
       <summary>오늘의 헤드라인</summary>
-        <div className="h-56 scrollbar-hidden">
+        <div className="h-64 scrollbar-hidden">
       <HeadLineContainer />
       </div>
       </details>
