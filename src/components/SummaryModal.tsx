@@ -19,7 +19,7 @@ const SummaryModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex mt-[60px]"
+      className="fixed inset-0 bg-black bg-opacity-50 flex mt-[60px] z-[50]"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           dispatch(closeSummaryModal());

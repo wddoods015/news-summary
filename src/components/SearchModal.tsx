@@ -65,7 +65,7 @@ const SearchModal: React.FC = () => {
     >
   <dialog
     open={isOpen}
-    className="w-full mx-auto h-600 rounded-b-lg shadow-lg p-10 flex flex-col items-center">
+    className="w-full mx-auto h-600 rounded-b-lg shadow-lg p-10 flex flex-col items-center mt-[60px]">
     <form onSubmit={handleSubmit} className='relative'>
       <input
                             type="text"

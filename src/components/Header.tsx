@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white">
+    <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white z-[60]">
       <h2 className="text-2xl font-bold mb-4">News</h2>
       <div className='flex gap-8'>
       <SearchIcon className="w-6 h-6" aria-label="Search Icon" onClick={handleOpenModal}/> {/* svg icon 컴포넌트로 사용 */}
