@@ -7,6 +7,7 @@ import { closeModal } from '@/redux/slice/ModalSlice'; // closeModal 액션 가�
 import { fetchTrends } from '@/redux/slice/TrendSlice';
 import { fetchNewsByKeyword, setSearchKeyword } from '@/redux/slice/NewsSlice';
 import { useRouter } from 'next/navigation';
+import SearchIcon from './icon/search-icon.svg';
 
 const SearchModal: React.FC = () => {
   const state = useSelector((state: RootState) => state); // 전체 상태 가져오기
@@ -45,6 +46,7 @@ const SearchModal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleSearch(searchInput);
+    console.log('키워드 검색: ', searchInput)
   }
 
   // 트렌드 키워드 클릭
@@ -76,9 +78,15 @@ const SearchModal: React.FC = () => {
             type="submit" 
             className="absolute right-6 top-1/2 transform -translate-y-1/2"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" className="icon">
+            <SearchIcon 
+              className="text-gray-700"  
+              alt="Search"
+              width={20}
+              height={20}
+            />
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" className="icon">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linejoin="round" stroke-linecap="round"></path>
-            </svg>
+            </svg> */}
           </button>
     </form>
 
