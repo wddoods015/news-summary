@@ -7,7 +7,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import { setSelectedCategory } from '@/redux/slice/CategorySlice';
-import { fetchNewsByDate, fetchNewsByCategory } from '@/redux/slice/NewsSlice';
+import { fetchNewsByDate, fetchNewsByCategory, resetLoadCount } from '@/redux/slice/NewsSlice';
 import CategoryButton from './CategoryButton';
 
 
@@ -38,7 +38,7 @@ const CategoryContainer: React.FC = () => {
 
   const handleCategoryClick = (category: string) => {
     dispatch(setSelectedCategory(category));
-    
+    dispatch(resetLoadCount());
     // '전체' 카테고리 선택 시 현재 날짜의 뉴스를 가져옴
     if (category === '전체') {
       dispatch(fetchNewsByDate());
@@ -58,6 +58,7 @@ const CategoryContainer: React.FC = () => {
           onClick={() => scroll('left')}
           className="p-1 rounded-full bg-white shadow-md hover:bg-gray-100"
         >
+          ◀
         </button>
       </div>
       
@@ -82,7 +83,9 @@ const CategoryContainer: React.FC = () => {
           onClick={() => scroll('right')}
           className="p-1 rounded-full bg-white shadow-md hover:bg-gray-100"
         >
+          ▶
         </button>
+        <div></div>
       </div>
     </div>
   );
