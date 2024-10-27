@@ -19,13 +19,12 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ Bookmark }) => {
   const saveBookmark = () => {
     // 북마크 저장 데이터의 고유성을 위해 key필수
     const bookmarkKey = Bookmark.link;
-    chrome.storage.local.set({ [bookmarkKey]: Bookmark }, () => {
-      console.log('Bookmark saved:', Bookmark);
-    });
+    window.localStorage.setItem(bookmarkKey, JSON.stringify(Bookmark));
+    console.log('Bookmark saved:', Bookmark);
   };
 
   return (
-  <button  onClick={saveBookmark}  aria-label="Bookmark Icon" >
+  <button  onClick={saveBookmark}  aria-label="Bookmark Icon" className="border border-gray-800 text-gray-800 px-3 rounded">
     북마크
   </button>
 
