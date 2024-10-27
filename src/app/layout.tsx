@@ -19,7 +19,6 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "3줄 요약 news",
   description: "뉴스를 한눈에 요약해서 보여주는 확장 프로그램. 중요한 정보만 빠르게 확인하고 시간을 절약하세요."
-,
 };
 
 export default function RootLayout({
