@@ -37,6 +37,10 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     description: article.description,
   };
     
+  const containsNaver = (str: string): boolean => {
+    return str.includes("naver.com");
+};
+
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
       <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-333333-500">
@@ -48,7 +52,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
       </a>
       <p>{article.pubDate}</p>
       <BookmarkButton Bookmark={Bookmark} />
-      {article.link !== article.originallink ? <button className="bg-blue-500 text-white  rounded-[5px] p-1.5 ml-[85%]" onClick={() => handleClick(article.link)}>3줄 요약</button> : null}
+      {containsNaver(article.link) ? <button className="bg-blue-500 text-white  rounded-[5px] p-1.5 ml-[85%]" onClick={() => handleClick(article.link)}>3줄 요약</button> : null}
     </div>
   );
 };
