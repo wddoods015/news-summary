@@ -7,7 +7,7 @@ import { closeModal } from '@/redux/slice/ModalSlice'; // closeModal 액션 가�
 import { fetchTrends } from '@/redux/slice/TrendSlice';
 import { fetchNewsByKeyword, setSearchKeyword } from '@/redux/slice/NewsSlice';
 import { useRouter } from 'next/navigation';
-import SearchIcon from './icon/search-icon.svg';
+import SearchIcon from '@/components/icon/search-icon.svg';
 
 const SearchModal: React.FC = () => {
   const state = useSelector((state: RootState) => state); // 전체 상태 가져오기
