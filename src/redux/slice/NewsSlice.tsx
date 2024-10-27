@@ -1,10 +1,6 @@
 // src/redux/slice/newsSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getNewsByCategory, getNewsByDate } from '@/api/apiNewsList';
-import { getNewsByCategory, getNewsByDate } from '@/api/apiNewsList';
-import axios from 'axios';
-
-const API_URL = 'https://wispmall.duckdns.org'
+import { getNewsByCategory, getNewsByDate, getNewsByKeyword } from '@/api/apiNewsList';
 
 // 날짜 형식을 YYYY-MM-DD로 변환하는 함수
 const formatDate = (date: Date): string => {
@@ -39,42 +35,18 @@ interface NewsState {
   items: NewsItem[];
   loading: boolean;
   error: string | null;
+  searchKeyword: string;
 }
 
 const initialState: NewsState = {
   items: [],
   loading: false,
   error: null,
+  searchKeyword: ''
 };
 
 // API 요청 함수 
 // 현재날짜 뉴스리스트
-// 수정전
-// export const fetchNewsByDate = createAsyncThunk(
-//   'news/fetchNewsByDate',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const currentDate = formatDate(new Date());
-
-//       const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-//       const currentDate = formatDate(new Date());
-
-//       const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-//       console.log(response.data);
-//       console.log(response.data.data.items)
-//       return response.data.data.items;
-//       console.log(response.data.data.items)
-//       return response.data.data.items;
-//     } catch (error) {
-//       if (axios.isAxiosError(error)) {
-//         return rejectWithValue(error.message);
-//       }
-//       return rejectWithValue('An unexpected error occurred');
-//     }
-//   }
-// );
-
-// 수정후
 export const fetchNewsByDate = createAsyncThunk(
   'news/fetchNewsByDate',
   async (_, { rejectWithValue }) => {
@@ -83,16 +55,6 @@ export const fetchNewsByDate = createAsyncThunk(
       return await getNewsByDate(currentDate);
     } catch (error: any) {
       return rejectWithValue(error.message);
-
-    //   const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-    //   console.log(response.data);
-    //   console.log(response.data.data.items)
-    //   return response.data.data.items;
-    // } catch (error) {
-    //   if (axios.isAxiosError(error)) {
-    //     return rejectWithValue(error.message);
-    //   }
-    //   return rejectWithValue('An unexpected error occurred');
     }
   }
 );
@@ -109,35 +71,12 @@ export const fetchNewsByCategory = createAsyncThunk(
   }
 );
 
-// 수정후
-export const fetchNewsByDate = createAsyncThunk(
-  'news/fetchNewsByDate',
-  async (_, { rejectWithValue }) => {
+// 검색 결과
+export const fetchNewsByKeyword = createAsyncThunk(
+  'news/fetchNewsByKeyword',
+  async (keyword: string, { rejectWithValue }) => {
     try {
-      const currentDate = formatDate(new Date());
-      return await getNewsByDate(currentDate);
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-
-    //   const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-    //   console.log(response.data);
-    //   console.log(response.data.data.items)
-    //   return response.data.data.items;
-    // } catch (error) {
-    //   if (axios.isAxiosError(error)) {
-    //     return rejectWithValue(error.message);
-    //   }
-    //   return rejectWithValue('An unexpected error occurred');
-    }
-  }
-);
-
-// 카테고리 뉴스리스트
-export const fetchNewsByCategory = createAsyncThunk(
-  'news/fetchNewsByCategory',
-  async (category: string, { rejectWithValue }) => {
-    try {
-      return await getNewsByCategory(category);
+      return await getNewsByKeyword(keyword);
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -148,7 +87,15 @@ export const fetchNewsByCategory = createAsyncThunk(
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchKeyword: (state, action: PayloadAction<string>) => {
+      state.searchKeyword = action.payload;
+    },
+    clearSearch: (state) => {
+      state.searchKeyword = '';
+      state.items = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNewsByCategory.pending, (state) => {
@@ -174,8 +121,21 @@ const newsSlice = createSlice({
       .addCase(fetchNewsByDate.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(fetchNewsByKeyword.pending, (state) => {
+        state.loading =true;
+        state.error = null;
+      })
+      .addCase(fetchNewsByKeyword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchNewsByKeyword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
+export const { setSearchKeyword, clearSearch } = newsSlice.actions;
 export default newsSlice.reducer;

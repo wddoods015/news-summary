@@ -1,4 +1,3 @@
-// 아직 적용 x
 // apiNewsList.ts
 // 현재날짜 모든 뉴스리스트, 카테고리 뉴스리스트 API 요청 함수
 
@@ -18,7 +17,7 @@ const formatDate = (date: Date): string => {
 export const getNewsByDate = async (date: string) => {
   const currentDate = formatDate(new Date());
   const response = await axios.get(`${API_URL}/api/articles/${currentDate}`);
-  console.log('오늘자 모든 뉴스: ', response.data.data.items)
+  // console.log('전체 뉴스: ', response.data.data.items)
   return response.data.data.items;
 };
 
@@ -27,6 +26,14 @@ export const getNewsByCategory = async (categoryName: string) => {
   const encodedCategory = encodeURIComponent(categoryName);
   const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/category/${encodedCategory}`)
   // console.log('카테고리:', encodedCategory)
-  console.log('카테고리 뉴스: ', response.data.data.items)
+  // console.log('카테고리 뉴스: ', response.data.data.items)
+  return response.data.data.items;
+}
+
+// 검색 결과 뉴스 리스트
+export const getNewsByKeyword = async (keyword: string) => {
+  const encodedKeyword = encodeURIComponent(keyword);
+  const response = await axios.get(`${API_URL}/api/articles/${encodedKeyword}`)
+  console.log('검색 결과: ', response.data.data.items);
   return response.data.data.items;
 }
