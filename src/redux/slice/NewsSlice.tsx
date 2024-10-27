@@ -1,9 +1,6 @@
 // src/redux/slice/newsSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getNewsByCategory, getNewsByDate } from '@/api/apiNewsList';
-import axios from 'axios';
-
-const API_URL = 'https://wispmall.duckdns.org'
+import { getNewsByCategory, getNewsByDate, getNewsByKeyword } from '@/api/apiNewsList';
 
 // 날짜 형식을 YYYY-MM-DD로 변환하는 함수
 const formatDate = (date: Date): string => {
@@ -15,7 +12,6 @@ const formatDate = (date: Date): string => {
 
 // 타입 정의
 export interface NewsItem {
-  index: string;
   title: string;
   description: string;
   link: string;
@@ -49,6 +45,8 @@ interface NewsState {
   loading: boolean;
   error: string | null;
   loadCount : number;
+  searchKeyword: string;
+
 }
 
 const initialState: NewsState = {
@@ -56,32 +54,12 @@ const initialState: NewsState = {
   visibleItems : [],
   loading: false,
   error: null,
-  loadCount: 1
+  loadCount: 1,
+  searchKeyword: ''
 };
 
 // API 요청 함수 
 // 현재날짜 뉴스리스트
-// 수정전
-// export const fetchNewsByDate = createAsyncThunk(
-//   'news/fetchNewsByDate',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const currentDate = formatDate(new Date());
-
-//       const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-//       console.log(response.data);
-//       console.log(response.data.data.items)
-//       return response.data.data.items;
-//     } catch (error) {
-//       if (axios.isAxiosError(error)) {
-//         return rejectWithValue(error.message);
-//       }
-//       return rejectWithValue('An unexpected error occurred');
-//     }
-//   }
-// );
-
-// 수정후
 export const fetchNewsByDate = createAsyncThunk(
   'news/fetchNewsByDate',
   async (_, { rejectWithValue }) => {
@@ -90,16 +68,6 @@ export const fetchNewsByDate = createAsyncThunk(
       return await getNewsByDate(currentDate);
     } catch (error: any) {
       return rejectWithValue(error.message);
-
-    //   const response = await axios.get<NewsApiResponse>(`${API_URL}/api/articles/${currentDate}`);
-    //   console.log(response.data);
-    //   console.log(response.data.data.items)
-    //   return response.data.data.items;
-    // } catch (error) {
-    //   if (axios.isAxiosError(error)) {
-    //     return rejectWithValue(error.message);
-    //   }
-    //   return rejectWithValue('An unexpected error occurred');
     }
   }
 );
@@ -110,6 +78,18 @@ export const fetchNewsByCategory = createAsyncThunk(
   async (category: string, { rejectWithValue }) => {
     try {
       return await getNewsByCategory(category);
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// 검색 결과
+export const fetchNewsByKeyword = createAsyncThunk(
+  'news/fetchNewsByKeyword',
+  async (keyword: string, { rejectWithValue }) => {
+    try {
+      return await getNewsByKeyword(keyword);
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -131,6 +111,13 @@ const newsSlice = createSlice({
     resetLoadCount: (state) => {
       state.loadCount = 1;
       console.log('state.loadCount', state.loadCount);
+    },
+    setSearchKeyword: (state, action: PayloadAction<string>) => {
+      state.searchKeyword = action.payload;
+    },
+    clearSearch: (state) => {
+      state.searchKeyword = '';
+      state.items = [];
     }
   },
   extraReducers: (builder) => {
@@ -160,9 +147,22 @@ const newsSlice = createSlice({
       .addCase(fetchNewsByDate.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(fetchNewsByKeyword.pending, (state) => {
+        state.loading =true;
+        state.error = null;
+      })
+      .addCase(fetchNewsByKeyword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchNewsByKeyword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
 export default newsSlice.reducer;
-export const { addVisibleNews, addLoadCount, resetLoadCount } = newsSlice.actions;
+export const { addVisibleNews, addLoadCount, resetLoadCount, setSearchKeyword, clearSearch } = newsSlice.actions;
+

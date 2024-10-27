@@ -58,6 +58,7 @@ const CategoryContainer: React.FC = () => {
           onClick={() => scroll('left')}
           className="p-1 rounded-full bg-white shadow-md hover:bg-gray-100"
         >
+          ◀
         </button>
       </div>
       
@@ -82,6 +83,7 @@ const CategoryContainer: React.FC = () => {
           onClick={() => scroll('right')}
           className="p-1 rounded-full bg-white shadow-md hover:bg-gray-100"
         >
+          ▶
         </button>
         <div></div>
       </div>
