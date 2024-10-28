@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1>A news feed service using the Naver API and Gemini API</h1>
 
-## Getting Started
+- Created by doy00, wddoods015, hycho1
+> https://news-feed-in-the-whale-sidebar.vercel.app
 
-First, run the development server:
+<h2>Feature</h2>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Using Naver Search API to Retrieve News Data.
+- Summarize the news article content into 3 lines using the LLM Gemini API.
+- Save through news bookmarks.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h2>Technology</h2>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<h4>Server Side</h4>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Python: 3.12.3
+- nodejs: 18.19.1
+- express: 4.21.1
 
-## Learn More
+<h4>Client Side</h4>
 
-To learn more about Next.js, take a look at the following resources:
+- react: 18
+- react-redux: 9.1.2
+- @reduxjs/toolkit: 2.3.0
+- axios: 1.7.7
+- nextjs: 14.2.15
+- tailwindcss: 3.4.1
+- typescript: 5
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<h2>Needed but not included in the repository</h2>
 
-## Deploy on Vercel
+- '.env' file for NodeJS (The KEY name must be retained)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Naver API  NAVER_CLIENT_ID & NAVER_CLIENT_SECRET
+> https://developers.naver.com/main/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GEMINI_API_KEY
+
+> https://aistudio.google.com/app/apikey?hl=ko
+
+* SSL certificate is required for HTTPS communication
+
+- node_module
+ > npm install
