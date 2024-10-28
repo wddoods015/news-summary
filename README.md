@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+##A news feed service using the Naver API and Gemini API
+- Created by doy00, wddoods015, hycho1
+- Link: news-feed-in-the-whale-sidebar.vercel.app
 
-## Getting Started
+##Feature
+1. Using Naver Search API to Retrieve News Data.
+2. Summarize the news article content into 3 lines using the LLM Gemini API.
+3. Save through news bookmarks.
 
-First, run the development server:
+##Technology
+ - Server Side
+Python: 3.12.3
+nodejs: 18.19.1
+express: 4.21.1
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ - Client Side
+react: 18
+react-redux: 9.1.2
+@reduxjs/toolkit: 2.3.0
+axios: 1.7.7
+nextjs: 14.2.15
+tailwindcss: 3.4.1
+typescript: 5
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+##Needed but not included in the repository
+- '.env' file for NodeJS (The KEY name must be retained)
+ > Naver API  NAVER_CLIENT_ID & NAVER_CLIENT_SECRET
+Link: https://developers.naver.com/main/
+ > GEMINI_API_KEY
+Link: https://aistudio.google.com/app/apikey?hl=ko
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* SSL certificate is required for HTTPS communication
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- node_module
+ > npm install
