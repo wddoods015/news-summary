@@ -19,14 +19,14 @@ const SummaryModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex mt-[60px]"
+      className="fixed inset-0 bg-black bg-opacity-50 flex mt-[60px] z-[50]"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           dispatch(closeSummaryModal());
         }
       }}
     >
-      <dialog className="w-full mx-auto h-screen rounded-b-lg shadow-lg p-10 flex flex-col">
+            <dialog className="fixed top-0 left-0 w-full h-full mx-auto rounded-lg shadow-lg p-10 flex flex-col z-[100]">
         <h2 className="text-lg font-bold mb-[40px]">3줄 요약</h2>
         <span>{summary}</span> 
         <span>뉴스 링크</span>
