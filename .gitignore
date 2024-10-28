@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+nodejs_newsfeed/src/.ssl
+nodejs_newsfeed/src/.env
