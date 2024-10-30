@@ -25,23 +25,29 @@ import CategoryContainer from '@/components/CategoryContainer';
 
 export default function Home() {
   return (
-    <main className="min-w-[390px] mx-auto p-4 border h-auto" >
+    <main className="min-w-[390px] mx-auto p-4 h-auto ml-[10%] mr-[10%]" >
       <Header/>
       <Menu/>
       <SummaryModal/>
       <SearchModal/>
-      <details open className='mt-16'>
-      <summary>오늘의 헤드라인</summary>
-        <div className="h-64 scrollbar-hidden">
+      <details open className='mt-24'>
+      <summary className='mb-4 font-bold text-xl'>오늘의 헤드라인</summary>
+        <div className="h-auto scrollbar-hidden">
       <HeadLineContainer />
       </div>
       </details>
-      <div className='h-24 border border-gray-300'>
+      <div className='h-24'>
       <CategoryContainer />
       </div>
-      <div className="h-1000 overflow-y-auto border border-gray-300">
+      <div className="h-1000 overflow-y-auto">
       <NewsListContainer />
       </div>
+      <div className="pt-[80px] w-full h-[180px] flex flex-col items-center gap-4">
+       <span>© 2024. WI All Rights Reserved.</span>
+       <a href='https://github.com/wddoods015/news-summary'>Github</a>
+
+      </div>
     </main>
+    
   );
 }

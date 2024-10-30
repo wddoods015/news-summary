@@ -29,7 +29,7 @@ interface HeadLineCardProps {
   };
 
     return (
-      <div className="bg-white border border-solid border-grey-500 rounded-lg p-4">
+      <div className=" h-64 bg-white border border-solid border-grey-500 rounded-lg p-4">
         <a href={Headarticle.link} target="_blank" rel="noopener noreferrer" className="text-333333-500">
         <h4 className="text-xl font-semibold mb-2">{removeHTMLTags(Headarticle.title)}</h4>
         <p className="text-gray-600 mb-4 text-xs">{removeHTMLTags(Headarticle.description)}</p>
