@@ -1,6 +1,7 @@
 // src/components/NewsListContainer.tsx
 'use client';
 
+
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
@@ -49,7 +50,16 @@ export default function NewsListContainer() {
 
   }, [dispatch,visibleItems]);
 
-  if (loading) return <div className='h-[1000px]'>Loading...</div>;
+  if (loading) return   <div className='flex flex-col items-center justify-center h-[1000px]'>
+  
+  <div className='flex space-x-2'>
+  <p>Loading...</p>
+    <span className="w-4 h-4 bg-[#333333] rounded-full animate-bounce"></span>
+    <span className="w-4 h-4 bg-[#333333] rounded-full animate-bounce"></span>
+    <span className="w-4 h-4 bg-[#333333] rounded-full animate-bounce"></span>
+  </div>
+</div>;
+
   if (error) return <div className='h-[1000px]'>Error: {error}</div>;
 
   return (

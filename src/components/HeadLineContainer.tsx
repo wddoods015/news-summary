@@ -17,7 +17,7 @@ export default function HeadLineContainer() {
         dispatch(fetchHeadines());
       }, [dispatch]);
     
-      if (isLoading) return <div>Loading...</div>;
+      if (isLoading) return <div></div>;
       if (error) return <div>Error: {error}</div>;
       console.log('headline news확인', headlines);
 

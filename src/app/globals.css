@@ -34,4 +34,12 @@ body {
   .scrollbar-hidden::-webkit-scrollbar {
     display: none; /* Chrome, Safari 스크롤바 숨기기 */
   }
+
+  .dot {
+    width: 1rem; /* 점의 크기 조절 */
+    height: 1rem; /* 점의 크기 조절 */
+    border-radius: 50%; /* 점 모양으로 만들기 */
+    margin: 0 0.25rem; /* 점 사이의 간격 조절 */
+    background-color: aqua;
+  }
 }
