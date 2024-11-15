@@ -1,7 +1,7 @@
 <h1>A news feed service using the Naver API and Gemini API</h1>
 
 - Created by doy00, wddoods015, hycho1
-> https://news-feed-in-the-whale-sidebar.vercel.app
+> [https://news-summary-lake.vercel.app/](https://news-summary-lake.vercel.app/)
 
 <h2>Feature</h2>
 
